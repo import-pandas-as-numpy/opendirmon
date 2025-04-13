@@ -142,7 +142,14 @@ WGET_OPTS=("${DEFAULT_WGET_OPTS[@]}")
 # Override defaults if specified by the user
 for opt in "${USER_WGET_OPTS[@]}"; do
     key=$(echo "$opt" | cut -d= -f1)
-    if [[ "${WGET_OPTS[@]}" =~ "$key="* ]]; then
+    found=false
+    for existing_opt in "${WGET_OPTS[@]}"; do
+        if [[ "$existing_opt" == "$key="* ]]; then
+            found=true
+            break
+        fi
+    done
+    if $found; then
         echo -e "${YELLOW}[!] Overriding default wget option: $key${NC}"
         WGET_OPTS=("${WGET_OPTS[@]/$key=*/}" "$opt")
     else
