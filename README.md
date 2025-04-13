@@ -43,6 +43,13 @@ Monitor an open directory with a static user agent by overriding the `--user-age
 - **Hash Log**: `~/opendirmon/opendir/hashes.txt`
   - Tracks SHA-256 hashes of downloaded files to detect duplicates.
 
+## Downloaded Files
+
+- All downloaded files are stored in the `~/opendirmon/downloads` directory.
+  - Each download session creates a subdirectory named using the hostname of the monitored URL and a timestamp (e.g., `example.com_20231015_123456`).
+  - If no new files are detected during a session, the corresponding subdirectory is removed to save space.
+  - Duplicate files are automatically deleted during processing.
+
 ## Requirements
 
 - **Dependencies**:
